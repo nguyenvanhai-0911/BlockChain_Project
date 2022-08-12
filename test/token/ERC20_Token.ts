@@ -32,5 +32,12 @@ describe("ERC20_Token", function(){
         expect(await yb_token.balanceOf(users[2])).to.equal(50000);
     })
     
+    it("Burn YB Token", async() => {
+        await yb_token.burn(users[1], 5000);
+        await yb_token.burn(users[2], 50000)
+
+        expect(await yb_token.balanceOf(users[1])).to.equal(5000);
+        expect(await yb_token.balanceOf(users[2])).to.equal(0);
+    })
 
 })

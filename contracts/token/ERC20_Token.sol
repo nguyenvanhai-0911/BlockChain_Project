@@ -14,6 +14,10 @@ contract FaucetToken is ERC20 {
     function mint(address _to, uint256 _amount) public {
         _mint(_to, _amount);
     }
+
+    function burn(address _to, uint256 _amount) public {
+        _burn(_to, _amount);
+    }
 }
 
 contract ERC20Token is ERC20, Ownable {
