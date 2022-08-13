@@ -40,4 +40,14 @@ describe("ERC20_Token", function(){
         expect(await yb_token.balanceOf(users[2])).to.equal(0);
     })
 
+    it("Total supply YB Token", async() => {
+        await yb_token.mint(users[3], 2000000);
+        expect(await yb_token.totalSupply()).to.equal(2005000);
+    })
+
+    it("Balance of User[1]", async() => {
+        expect(await yb_token.balanceOf(users[1])).to.equal(5000);
+        expect(await yb_token.balanceOf(users[3])).to.equal(2000000);
+    })
+
 })
