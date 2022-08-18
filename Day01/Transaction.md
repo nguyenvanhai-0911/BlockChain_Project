@@ -1,8 +1,8 @@
-## **A Live Ethereum Transaction**
+## *** A Live Ethereum Transaction ***
 
 The first thing that we're going to need is an "ethereum wallet`.So go to `Metamask` because it's one of the most popular wallets and one of the easiest to use. Download the wallet, and it's going to be a little extension in the top right corner of your browser. This way, we can easily see at any time what we have in our wallet. Go ahead and install Metamask.
 
-**Wallet Creation**
+*** Wallet Creation ***
 
 We're going to create a brand new wallet, so go ahead and hit "create a wallet." If you already have a wallet, you can import it via seed phrase.
 
@@ -20,32 +20,32 @@ We can see the user interface of this wallet, and if you look in your extensions
 Our mnemonic phrase for that secret phrase that we got has given us access to a new account.
 
 
-**Etherscan**
+*** Etherscan ***
 
 For the address of our account, we can use a tool like `Etherscan`.
 
 
 So if we look at this address that we just created, we can see that no transactions have happened. It's empty. It has zero ether. It has zero dollars' worth of value. The address above is the unique address that represents exclusively the single account that we just created.
 
-**Multiple Accounts**
+*** Multiple Accounts ***
 
 We can even click the circle and create more accounts and give them a different account name.
 
 
 Account 2 will have a different account address.
 
-**Public and private keys, as well as mnemonics**
+*** Public and private keys, as well as mnemonics ***
 
 The mnemonic that we've been given gives us access to create multiple accounts with the same mnemonic. So having that mnemonic will give us access to every single account that's ever been created with that mnemonic. This is why securing your mnemonic is so crucial, especially if you create multiple different accounts. Each account has a unique identifier associated with it as well. The account address is the public address. However, there's also a private key to work with this account, a secret key. We can view it by clicking three dots, going to account details, and exporting the private key.
 
 
 This is a single password associated with this account. If you give somebody access to this private key, they'll have access to account 2. They won't have access to my account 1 because the private key of account 2 is only associated with account 2. The mnemonic, however, is associated with all accounts.
 
-**Mnemonic vs Private vs Public keys**
+**8 Mnemonic vs Private vs Public keys ***
 
 This is why when people say "store your keys in a safe place," they're referring to both private keys and mnemonics. If you lose your private key, you'll lose access to that account. If you lose your mnemonic, you lose access to all your accounts.
 
-**Mainnet & Testnets**
+*** Mainnet & Testnets ***
 
 What else is going on in Metamask? We can see this section here that says `Ethereum Mainnet`.If we click it, we can see a bunch of other networks here.
 
@@ -55,7 +55,7 @@ When you buy ETH and work with ETH, you're working on the Ethereum mainnet. When
 
 Later on, we're going to show you how to work with other EVM-compatible chains. Don't worry about EVM-compatible means for now, but we can work with Avalanche, Polygon, and other applications through network interfaces as well.
 
-**Initiating our first transaction**
+*** Initiating our first transaction ***
 
 We're going to make our first transaction on the Rinkeby Testnet, and this will simulate exactly what it's like to make the transaction on the Ethereum Mainnet.
 
@@ -71,7 +71,7 @@ If we take the account address and go over to Rinkeby Etherscan, we now see the 
 
 But if we look at `Ethereum Mainnet` we've nothing there. We've just completed our first transaction. And if we refresh the page, we can also see that this is our first transaction that was made. Some accounts sent us 18.75 ether. We can even look at the details of the transaction.
 
-**Transaction details**
+*** Transaction details ***
 
 Etherscan is what's known as `Block Explorer`. Block Explorer is an application that allows us to see the details of things that happen on a blockchain easily. We can see the transaction details of the transaction that we made, and whenever we work with `Smart Contract` we'll also see them in a transaction similar to what we'll see in the transaction details.
 
@@ -82,18 +82,18 @@ We can see the block number, which we can see in a little bit.
 
 We can see this unique account, which is the faucet account.
 
-**Gas fees, Transaction fees, Gas limit, Gas price**
+*** Gas fees, Transaction fees, Gas limit, Gas price ***
 
 "Gas refers to the fee paid to node operators for successfully including a transaction in a blockchain. Now, exactly how this works is going to change pretty soon, but the concept is that anytime you want to change the state of the blockchain, whether this is sending some Ethereum or making any type of transaction, you have to pay a little bit of Ethereum or a little bit of that native blockchain token to execute that transaction. Whenever we do something on the blockchain, it costs gas, and if we do something that would take a lot of energy for the blockchain to do, it will cost more gas. So if I send a single transaction, that's going to cost 21,000 gas. However, if I were to send a transaction that called the smart contract function and did a whole bunch of other stuff, it'd cost more gas. We see here that whoever sent us ETH also paid the blockchain miners or blockchain validators a little bit of Ethereum to include our transaction. We get to pick how much of a fee we want to send with our transactions.
 
 
-**Gas vs Gas price vs Gas Limit vs Transaction fee**
+*** Gas vs Gas price vs Gas Limit vs Transaction fee ***
 
 Why would we ever want to pay more for gas? Why do I even have the option to pay more?
 
 A blockchain can only process so many transactions at a time, and nodes and blockchain nodes can only process so many at a time. So when I make a transaction, a node has to decide why they want to include my transaction in the block. If there are a ton of people looking to make these transactions, then the nodes are going to be highly incentivized to pick the transactions that are going to give them a high price that is going to give them a lot of money for including that transaction.
 
-**Gas estimator**
+*** Gas estimator ***
 
 We were able to obtain the blockchain gas estimator from ethgasstation.info.
 
@@ -111,9 +111,9 @@ With just this little bit of information, you now know how to interact with bloc
 
 Let's look under the hood of Ethereum and see what is going on with these transactions, with this gas, and with these blockchains. Let's learn all the fundamentals of blockchain technology.
 
-## **How Blockchain Works/What Happens Inside Blockchain**
+### *** How Blockchain Works/What Happens Inside Blockchain ***
 
-**Hash or Hashing or SHA256**
+*** Hash or Hashing or SHA256 ***
 
 Before we get started, we need to take a look at this thing that we call the SHA256 hash. A hash looks like a bunch of random numbers and it's a fingerprint of some digital data.
 
@@ -127,7 +127,7 @@ This is the hash of the text 'blockchain' in all lowercase, which starts with 53
 
 You could type tons and tons of text and you'd get a hash, and the interesting thing is that if there's a tiny amount of information, no information, or an entire library of congress, you're always going to get a hash that is this long as shown above. You're not going to be able to guess what it is. You'd always get the same hash regardless of how many times you put the same information in.
 
-**Block**
+*** Block ***
 
 Let's extend the idea of a hash into something that we're going to call a block.
 
@@ -144,7 +144,7 @@ Above you can see the `mine` button. When I click the mine button, it's going to
 
 It stopped at 64,658 and that one just happens to hash out to something that starts with four zeros, so it satisfies the little definition of what a `signed block` is.
 
-**Blockchain**
+*** Blockchain 8**
 
 A blockchain is just the chain of these blocks. How do you put them together? Let's do that.
 
@@ -178,7 +178,7 @@ What I wanted to say is that if I go and change the last block, all I've got to 
 
 `How do I know that my blockchain has been re-mined ?`
 
-**Decentralized/Distributed Blockchain**
+*** Decentralized/Distributed Blockchain ***
 
 Let's take a look at `Distributed Blockchain`.
 
@@ -192,7 +192,7 @@ If I type something on Peer B block 4, and re-mine block 4 and block 5,
 
 All the blocks in Peer B are green. However, the Peer A chain says that the last hash starts with '0000e4', Peer C says '0000e4', but the middle one says '00004c'. So just by glancing at Peer B's hash, something is wrong with that Peer B, even though all of the hash starts with four zeros. Essentially, it's two against one. Peer A argues it's' 000e4 ', Peer B argues it's' 00004c ', and Peer C argues it's' 000e4 '. So '0000e4' wins. So that's how a completely distributed copy works. Having a copy on many different computers can all very quickly see if all of the blocks are identical. Blockchains can have 400,000–500,000 blocks very easily, so rather than checking through all of them, all you have to do is to look at the hash of the most recent one and you can see if anything in the past was altered. You can tell by looking at the last block in the chain.
 
-**Tokens/Transaction History**
+*** Tokens/Transaction History ***
 
 That's the entire thing. There's nothing more to it than that, but it's kind of not useful because we don't have anything in this data area that means anything. I keep typing text that's sort of irrelevant information. So what we want is a `token`.Let's do a token on our blockchain.
 
@@ -211,7 +211,7 @@ In the next block, another 100 dollars comes out of nowhere and goes to 'Anders'
 
 If we look at this blockchain that we've created and zip forward in time, we notice that 'Jackson' is giving 'Alexa' 2 dollars. Does Jackson have two dollars? We go back a block before and see that 'Emily' had gotten 10 dollars from 'Andres' and gave 10 to 'Jackson'.So 'Jackson' does have the money. That's one of the benefits of having a past in the block. It's easy to go backward.
 
-**Summary**
+*** Summary ***
 
 - Ethereum runs on Keccak256.
 
