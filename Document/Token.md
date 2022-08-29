@@ -127,44 +127,44 @@ The first standard was introduced in November 2015 by Fabian Vogelsteller as an 
 
 ERC20 is a standard for _fungible tokens_, meaning that different units of an ERC20 token are interchangeable and have no unique properties.
 
-http://bit.ly/2CUf7WG[The ERC20 standard] defines a common interface for contracts implementing a token, such that any compatible token can be accessed and used in the same way. The interface consists of a number of functions that must be present in every implementation of the standard, as well as some optional functions and attributes that may be added by developers.
+The ERC20 standard defines a common interface for contracts implementing a token, such that any compatible token can be accessed and used in the same way. The interface consists of a number of functions that must be present in every implementation of the standard, as well as some optional functions and attributes that may be added by developers.
 
-[[ERC20_reqd_func]]
-===== ERC20 required functions and events
 
-((("ERC20 token standard","required functions and events")))An ERC20-compliant token contract must provide at least the following functions and events:
+### *** ERC20 required functions and events ***
 
-+totalSupply+:: Returns the total units of this token that currently exist. ERC20 tokens can have a fixed or a variable supply.
+An ERC20-compliant token contract must provide at least the following functions and events:
 
-+balanceOf+:: Given an address, returns the token balance of that address.
+- totalSupply: Returns the total units of this token that currently exist. ERC20 tokens can have a fixed or a variable supply.
 
-+transfer+:: Given an address and amount, transfers that amount of tokens to that address, from the balance of the address that executed the transfer.
+- balanceOf: Given an address, returns the token balance of that address.
 
-+transferFrom+:: Given a sender, recipient, and amount, transfers tokens from one account to another. Used in combination with +approve+.
+- transfer: Given an address and amount, transfers that amount of tokens to that address, from the balance of the address that executed the transfer.
 
-+approve+:: Given a recipient address and amount, authorizes that address to execute several transfers up to that amount, from the account that issued the approval.
+- transferFrom: Given a sender, recipient, and amount, transfers tokens from one account to another. Used in combination with approve.
 
-+allowance+:: Given an owner address and a spender address, returns the remaining amount that the spender is approved to withdraw from the owner.
+- approve: Given a recipient address and amount, authorizes that address to execute several transfers up to that amount, from the account that issued the approval.
 
-+Transfer+:: Event triggered upon a successful transfer (call to +transfer+ or +transferFrom+) (even for zero-value transfers).
+- allowance: Given an owner address and a spender address, returns the remaining amount that the spender is approved to withdraw from the owner.
 
-+Approval+:: Event logged upon a successful call to +approve+.
+- Transfer: Event triggered upon a successful transfer (call to +transfer+ or +transferFrom+) (even for zero-value transfers).
 
-[[ERC20_optional_func]]
-===== ERC20 optional functions
+- Approval: Event logged upon a successful call to +approve+.
 
-((("ERC20 token standard","optional functions")))In addition to the required functions listed in the previous section, the following optional functions are also defined by the standard:
 
-+name+:: Returns the human-readable name (e.g., "US Dollars") of the token.
+### *** ERC20 optional functions ***
 
-+symbol+:: Returns a human-readable symbol (e.g., "USD") for the token.
+In addition to the required functions listed in the previous section, the following optional functions are also defined by the standard:
 
-+decimals+:: Returns the number of decimals used to divide token amounts. For example, if +decimals+ is +2+, then the token amount is divided by 100 to get its user pass:[<span class="keep-together">representation</span>].
+- name+:: Returns the human-readable name (e.g., "US Dollars") of the token.
 
-[[ERC20_interface]]
-===== The ERC20 interface defined in Solidity
+- symbol+:: Returns a human-readable symbol (e.g., "USD") for the token.
 
-((("ERC20 token standard","interface defined in Solidity")))Here's what an ERC20 interface specification looks like in Solidity:
+- decimals+:: Returns the number of decimals used to divide token amounts. For example, if +decimals+ is +2+, then the token amount is divided by 100 to get its user pass:[<span class="keep-together">representation</span>].
+
+
+### *** The ERC20 interface defined in Solidity ***
+
+Here's what an ERC20 interface specification looks like in Solidity:
 
 [[ERC20_interface_example]]
 [source,solidity]
@@ -173,20 +173,18 @@ contract ERC20 {
    function totalSupply() constant returns (uint theTotalSupply);
    function balanceOf(address _owner) constant returns (uint balance);
    function transfer(address _to, uint _value) returns (bool success);
-   function transferFrom(address _from, address _to, uint _value) returns
-      (bool success);
+   function transferFrom(address _from, address _to, uint _value) returns (bool success);
    function approve(address _spender, uint _value) returns (bool success);
-   function allowance(address _owner, address _spender) constant returns
-      (uint remaining);
+   function allowance(address _owner, address _spender) constant returns (uint remaining);
    event Transfer(address indexed _from, address indexed _to, uint _value);
    event Approval(address indexed _owner, address indexed _spender, uint _value);
 }
 ----
 
 [[ERC20_data_struct]]
-===== ERC20 data structures
+### *** ERC20 data structures ***
 
-((("data mapping")))((("ERC20 token standard","data structures")))If you examine any ERC20 implementation you will see that it contains two data structures, one to track balances and one to track allowances. In Solidity, they are implemented with a _data mapping_.
+If you examine any ERC20 implementation you will see that it contains two data structures, one to track balances and one to track allowances. In Solidity, they are implemented with a _data mapping_.
 
 The first data mapping implements an internal table of token balances, by owner. This allows the token contract to keep track of who owns the tokens. Each transfer is a deduction from one balance and an addition to another balance:
 
@@ -206,9 +204,9 @@ mapping (address => mapping (address => uint256)) public allowed;
 
 
 [[transfer_workflows]]
-===== ERC20 workflows: "transfer" and "approve & transferFrom"
+### *** ERC20 workflows: "transfer" and "approve & transferFrom"
 
-((("ERC20 token standard","transfer functions", id="ix_10tokens-asciidoc7", range="startofrange")))((("transfer function","ERC20 token standard", id="ix_10tokens-asciidoc8", range="startofrange")))The ERC20 token standard has two transfer functions. You might be wondering why.
+The ERC20 token standard has two transfer functions. You might be wondering why.
 
 ERC20 allows for two different workflows. The first is a single-transaction, straightforward workflow using the +transfer+ function. This workflow is the one used by wallets to send tokens to other wallets. The vast majority of token transactions happen with the +transfer+ workflow.
 
@@ -232,7 +230,7 @@ For the +approve+ & +transferFrom+ workflow, two transactions are needed. Let's 
 When the +AliceICO+ contract receives ether from Bob, it needs to send some AliceCoin to Bob in return. Within the +AliceICO+ contract is an exchange rate between AliceCoin and ether. The exchange rate that Alice set when she created the +AliceICO+ contract determines how many tokens Bob will receive for the amount of ether sent to the +AliceICO+ contract. When the +AliceICO+ contract calls the AliceCoin +transferFrom+ function, it sets Alice's address as the sender and Bob's address as the recipient, and uses the exchange rate to determine how many AliceCoin tokens will be transferred to Bob in the +value+ field. The +AliceCoin+ contract transfers the balance from Alice's address to Bob's address and triggers a +Transfer+ event. The +AliceICO+ contract can call +transferFrom+ an unlimited number of times, as long as it doesn't exceed the approval limit Alice set. The +AliceICO+ contract can keep track of how many AliceCoin tokens it can sell by calling the +allowance+ function.(((range="endofrange", startref="ix_10tokens-asciidoc8")))(((range="endofrange", startref="ix_10tokens-asciidoc7")))
 
 [[ERC20_implementation]]
-===== ERC20 implementations
+### *** ERC20 implementations ***
 
 While it is possible to implement an ERC20-compatible token in about 30 lines of Solidity code, most implementations are more complex. This is to account for potential security vulnerabilities. There are two implementations mentioned in the EIP-20 standard:
 
@@ -241,9 +239,9 @@ http://bit.ly/2EUYCMR[Consensys EIP20]:: A simple and easy-to-read implementatio
 https://bit.ly/2xPYck6[OpenZeppelin StandardToken]:: This implementation is ERC20-compatible, with additional security precautions. It forms the basis of OpenZeppelin libraries implementing more complex ERC20-compatible tokens with fundraising caps, auctions, vesting schedules, and other features.(((range="endofrange", startref="ix_10tokens-asciidoc6")))(((range="endofrange", startref="ix_10tokens-asciidoc5")))
 
 [[METoken_example]]
-==== Launching Our Own ERC20 Token
+### *** Launching Our Own ERC20 Token ***
 
-((("ERC20 token standard","METoken creation/launch example", id="ix_10tokens-asciidoc9", range="startofrange")))((("METoken (Mastering Ethereum Token)","creation/launch example", id="ix_10tokens-asciidoc10", range="startofrange")))Let's create and launch our own token. For this example, we will use the Truffle framework. The example assumes you have already installed +truffle+ and configured it, and are familiar with its basic operation (for details, see <<truffle>>).
+Let's create and launch our own token. For this example, we will use the Truffle framework. The example assumes you have already installed +truffle+ and configured it, and are familiar with its basic operation (for details, see <<truffle>>).
 
 We will call our token "Mastering Ethereum Token,&#x201d; with the symbol "MET."
 
