@@ -387,7 +387,7 @@ On the +ganache+ console, we should see that our deployment has created four new
 image::images/ganache_metoken.png["METoken deployment on Ganache"]
 
 [[truffle_console]]
-===== Interacting with METoken using the Truffle console
+### *** Interacting with METoken using the Truffle console
 
 ((("METoken (Mastering Ethereum Token)","interacting with via Truffle console", id="ix_10tokens-asciidoc11", range="startofrange")))((("Truffle","interacting with METoken via Truffle console", id="ix_10tokens-asciidoc12", range="startofrange")))We can interact with our contract on the +ganache+ blockchain using the Truffle console. This is an interactive JavaScript environment that provides access to the Truffle environment and, via web3, to the blockchain. In this case, we will connect the Truffle console to the +ganache+ blockchain:
 
@@ -497,7 +497,7 @@ If you switch to the +ganache+ graphical user interface, as shown in <<ganache_M
 image::images/ganache_metoken_transfer.png["METoken transfer on Ganache"]
 
 [[sending_erc20_tokens_contracts]]
-===== Sending ERC20 tokens to contract addresses
+### *** Sending ERC20 tokens to contract addresses
 
 ((("Faucet.sol contract (test example)","METoken project", id="ix_10tokens-asciidoc13", range="startofrange")))((("METoken (Mastering Ethereum Token)","sending to contract addresses", id="ix_10tokens-asciidoc14", range="startofrange")))So far, we've set up an ERC20 token and transferred some tokens from one account to another. All the accounts we used for these demonstrations are externally owned accounts, meaning they are controlled by a private key, not a contract. What happens if we send MET to a contract address? Let's find out!
 
@@ -580,7 +580,7 @@ Perhaps you anticipated this problem. Most likely, you didn't. In fact, neither 
 One of the ways that users of ERC20 tokens can inadvertently lose their tokens in a transfer, is when they attempt to transfer to an exchange or another service. They copy an Ethereum address from the website of an exchange, thinking they can simply send tokens to it. However, many exchanges publish receiving addresses that are actually contracts! These contracts are only meant to receive ether, not ERC20 tokens, most often sweeping all funds sent to them to "cold storage" or another centralized wallet. Despite the many warnings saying "do not send tokens to this address," lots of tokens are lost this way.(((range="endofrange", startref="ix_10tokens-asciidoc14")))(((range="endofrange", startref="ix_10tokens-asciidoc13")))
 
 [[transfer_workflow_demo]]
-===== Demonstrating the &#x201c;approve & transferFrom&#x201d; workflow
+### *** Demonstrating the &#x201c;approve & transferFrom&#x201d; workflow
 
 ((("approve & transferFrom workflow", id="ix_10tokens-asciidoc15", range="startofrange")))((("Faucet.sol contract (test example)","METoken approve & transferFrom workflow demonstration", id="ix_10tokens-asciidoc16", range="startofrange")))((("METoken (Mastering Ethereum Token)","approve & transferFrom workflow demonstration", id="ix_10tokens-asciidoc17", range="startofrange")))Our +Faucet+ contract couldn't handle ERC20 tokens. Sending tokens to it using the +transfer+ function resulted in the loss of those tokens. Let's rewrite the contract now and make it handle ERC20 tokens. Specifically, we will turn it into a faucet that gives out MET to anyone who asks.
 
@@ -813,7 +813,7 @@ interface ERC777Token {
 ----
 
 [[ERC777_hooks]]
-===== ERC777 hooks
+### *** ERC777 hooks
 
 [[ERC777TokensSender_interface]]
 The ERC777 tokens sender hook specification is:
