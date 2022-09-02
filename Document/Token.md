@@ -44,19 +44,19 @@ Tokens are fungible when we can substitute any single unit of the token for anot
 
 Strictly speaking, if a token's historical provenance can be tracked, then it is not entirely fungible. The ability to track provenance can lead to blacklisting and whitelisting, reducing or eliminating fungibility.
 
-((("non-fungible tokens (NFTs)")))Non-fungible tokens are tokens that each represent a unique tangible or intangible item and therefore are not interchangeable. For example, a token that represents ownership of a _specific_ Van Gogh painting is not equivalent to another token that represents a Picasso, even though they might be part of the same "art ownership token" system. Similarly, a token representing a _specific_ digital collectible such as a specific CryptoKitty is not interchangeable with any other CryptoKitty. Each non-fungible token is associated with a unique identifier, such as a serial number.
+Non-fungible tokens are tokens that each represent a unique tangible or intangible item and therefore are not interchangeable. For example, a token that represents ownership of a _specific_ Van Gogh painting is not equivalent to another token that represents a Picasso, even though they might be part of the same "art ownership token" system. Similarly, a token representing a _specific_ digital collectible such as a specific CryptoKitty is not interchangeable with any other CryptoKitty. Each non-fungible token is associated with a unique identifier, such as a serial number.
 
 We will see examples of both fungible and non-fungible tokens later in this chapter.
 
 [NOTE]
-====
+### ***
 Note that "fungible" is often used to mean "directly exchangeable for money" (for example, a casino token can be "cashed in," while laundry tokens typically cannot). This is _not_ the sense in which we use the word here.
-====
+### ***
 
 
 ### *** Counterparty Risk ***
 
-((("counterparty risk")))((("tokens","counterparty risk")))Counterparty risk is the risk that the _other_ party in a transaction will fail to meet their obligations. Some types of transactions suffer additional counterparty risk because there are more than two parties involved. For example, if you hold a certificate of deposit for a precious metal and you sell that to someone, there are at least three parties in that transaction: the seller, the buyer, and the custodian of the precious metal. Someone holds the physical asset; by necessity they become party to the fulfillment of the transaction and add counterparty risk to any transaction involving that asset. In general, when an asset is traded indirectly through the exchange of a token of ownership, there is additional counterparty risk from the custodian of the asset. Do they have the asset? Will they recognize (or allow) the transfer of ownership based on the transfer of a token (such as a certificate, deed, title, or digital token)? In the world of digital tokens representing assets, as in the nondigital world, it is important to understand who holds the asset that is represented by the token and what rules apply to that underlying asset.
+Counterparty risk is the risk that the _other_ party in a transaction will fail to meet their obligations. Some types of transactions suffer additional counterparty risk because there are more than two parties involved. For example, if you hold a certificate of deposit for a precious metal and you sell that to someone, there are at least three parties in that transaction: the seller, the buyer, and the custodian of the precious metal. Someone holds the physical asset; by necessity they become party to the fulfillment of the transaction and add counterparty risk to any transaction involving that asset. In general, when an asset is traded indirectly through the exchange of a token of ownership, there is additional counterparty risk from the custodian of the asset. Do they have the asset? Will they recognize (or allow) the transfer of ownership based on the transfer of a token (such as a certificate, deed, title, or digital token)? In the world of digital tokens representing assets, as in the nondigital world, it is important to understand who holds the asset that is represented by the token and what rules apply to that underlying asset.
 
 
 ### *** Tokens and Intrinsicality ***
@@ -105,9 +105,9 @@ Nevertheless, some of the most innovative business ideas are indeed taking place
 Finally, at the beginning of this chapter, when introducing tokens, we discussed the colloquial meaning of "token" as "something of insignificant value." The underlying reason for the insignificant value of most tokens is because they can only be used in a very narrow context: one bus company, one laundromat, one arcade, one hotel, or one company store. Limited liquidity, limited applicability, and high conversion costs reduce the value of tokens until they are only of "token" value. So when you add a utility token to your platform, but the token can only be used on your single platform with a small market, you are recreating the conditions that made physical tokens worthless. This may indeed be the correct way to incorporate tokenization into your project. However, if in order to use your platform a user has to convert something into your utility token, use it, and then convert the remainder back into something more generally useful, you've created a company scrip. The switching costs of a digital token are orders of magnitude lower than for a physical token without a market, but they are not zero. Utility tokens that work across an entire industry sector will be very interesting and probably quite valuable. But if you set up your startup to have to bootstrap an entire industry standard in order to succeed, you may have already failed.
 
 [NOTE]
-====
+### ***
 One of the benefits of deploying services on general-purpose platforms like Ethereum is being able to connect smart contracts (and therefore the utility of tokens) across projects, increasing the potential for liquidity and utility of tokens.
-====
+### ***
 
 Make this decision for the right reasons. Adopt a token because your application _cannot work without a token_. Adopt it because the token lifts a fundamental market barrier or solves an access problem. Don't introduce a utility token because it is the only way you can raise money fast and you need to pretend it's not a public securities offering.
 
@@ -155,11 +155,11 @@ An ERC20-compliant token contract must provide at least the following functions 
 
 In addition to the required functions listed in the previous section, the following optional functions are also defined by the standard:
 
-- name+:: Returns the human-readable name (e.g., "US Dollars") of the token.
+- name: Returns the human-readable name (e.g., "US Dollars") of the token.
 
-- symbol+:: Returns a human-readable symbol (e.g., "USD") for the token.
+- symbol: Returns a human-readable symbol (e.g., "USD") for the token.
 
-- decimals+:: Returns the number of decimals used to divide token amounts. For example, if +decimals+ is +2+, then the token amount is divided by 100 to get its user pass:[<span class="keep-together">representation</span>].
+- decimals: Returns the number of decimals used to divide token amounts. For example, if +decimals+ is +2+, then the token amount is divided by 100 to get its user pass:[<span class="keep-together">representation</span>].
 
 
 ### *** The ERC20 interface defined in Solidity ***
@@ -176,6 +176,7 @@ contract ERC20 {
    function transferFrom(address _from, address _to, uint _value) returns (bool success);
    function approve(address _spender, uint _value) returns (bool success);
    function allowance(address _owner, address _spender) constant returns (uint remaining);
+
    event Transfer(address indexed _from, address indexed _to, uint _value);
    event Approval(address indexed _owner, address indexed _spender, uint _value);
 }
@@ -212,17 +213,17 @@ ERC20 allows for two different workflows. The first is a single-transaction, str
 
 Executing the transfer contract is very simple. If Alice wants to send 10 tokens to Bob, her wallet sends a transaction to the token contract's address, calling the pass:[<span class="keep-together"><code>transfer</code></span>] function with Bob's address and +10+ as the arguments. The token contract adjusts Alice's balance (&#x2013;10) and Bob's balance (pass:[+10]) and issues a +Transfer+ event.
 
-((("approve & transferFrom workflow")))The second workflow is a two-transaction workflow that uses +approve+ followed by +transferFrom+. This workflow allows a token owner to delegate their control to another address. It is most often used to delegate control to a contract for distribution of tokens, but it can also be used by exchanges.
+The second workflow is a two-transaction workflow that uses +approve+ followed by +transferFrom+. This workflow allows a token owner to delegate their control to another address. It is most often used to delegate control to a contract for distribution of tokens, but it can also be used by exchanges.
 
-((("Initial Coin Offerings (ICOs)","tokens and")))For example, if a company is selling tokens for an ICO, they can +approve+ a crowdsale contract address to distribute a certain amount of tokens. The crowdsale contract can then +transferFrom+ the token contract owner's balance to each buyer of the token, as illustrated in <<approve_transferFrom_workflow>>.
+For example, if a company is selling tokens for an ICO, they can +approve+ a crowdsale contract address to distribute a certain amount of tokens. The crowdsale contract can then +transferFrom+ the token contract owner's balance to each buyer of the token, as illustrated in <<approve_transferFrom_workflow>>.
 
 [NOTE]
-====
-((("Initial Coin Offerings (ICOs)","defined")))An _Initial Coin Offering_ (ICO) is a crowdfunding mechanism used by companies and organizations to raise money by selling tokens. The term is derived from Initial Public Offering (IPO), which is the process by which a public company offers shares for sale to investors on a stock exchange. Unlike the highly regulated IPO markets, ICOs are open, global, and messy. The examples and explanations of ICOs in this book are not an endorsement of this type of fundraising.
-====
+### ***
+An _Initial Coin Offering_ (ICO) is a crowdfunding mechanism used by companies and organizations to raise money by selling tokens. The term is derived from Initial Public Offering (IPO), which is the process by which a public company offers shares for sale to investors on a stock exchange. Unlike the highly regulated IPO markets, ICOs are open, global, and messy. The examples and explanations of ICOs in this book are not an endorsement of this type of fundraising.
+### ***
 
 [[approve_transferFrom_workflow]]
-.The two-step approve & transferFrom workflow of ERC20 tokens
+The two-step approve & transferFrom workflow of ERC20 tokens
 image::images/approve_transferFrom_workflow.png["The two-step approve &amp; transferFrom workflow of ERC20 tokens"]
 
 For the +approve+ & +transferFrom+ workflow, two transactions are needed. Let's say that Alice wants to allow the +AliceICO+ contract to sell 50% of all the AliceCoin tokens to buyers like Bob and Charlie. First, Alice launches the +AliceCoin+ ERC20 contract, issuing all the AliceCoin to her own address. Then, Alice launches the +AliceICO+ contract that can sell tokens for ether. Next, Alice initiates the +approve+ & +transferFrom+ workflow. She sends a transaction to the +AliceCoin+ contract, calling +approve+ with the address of the +AliceICO+ contract and 50% of the +totalSupply+ as arguments. This will trigger the +Approval+ event. Now, the +AliceICO+ contract can sell AliceCoin.
@@ -246,9 +247,9 @@ Let's create and launch our own token. For this example, we will use the Truffle
 We will call our token "Mastering Ethereum Token,&#x201d; with the symbol "MET."
 
 [NOTE]
-====
+### ***
 You can find this example https://github.com/ethereumbook/ethereumbook/blob/develop/code/truffle/METoken[in the book's GitHub repository].
-====
+### ***
 
 First, let's create and initialize a Truffle project directory. Run these four commands and accept the default answers to any questions:
 
@@ -295,9 +296,9 @@ METoken/
 ----
 
 [WARNING]
-====
+### ***
 Only use test keys or test mnemonics that are _not_ used to hold funds on the main Ethereum network. _Never_ use keys that hold real money for testing.
-====
+### ***
 
 For our example, we will import the OpenZeppelin library, which implements some important security checks and is easy to extend:
 
@@ -318,12 +319,12 @@ Our contract, shown in <<solidity_token_example>>, is very simple, as it inherit
 
 [[solidity_token_example]]
 .METoken.sol: A Solidity contract implementing an ERC20 token
-====
+### ***
 [source,solidity,linenums]
 ----
 include::code/truffle/METoken/contracts/METoken.sol[]
 ----
-====
+### ***
 
 Here, we are defining the optional variables +name+, +symbol+, and +decimals+. We also define an +_initial_supply+ variable, set to 21 million tokens; with two decimals of subdivision that gives 2.1 billion total units. In the contract's initialization (constructor) function we set the +totalSupply+ to be equal to +_initial_supply+ and allocate all of the +_initial_supply+ to the balance of the account (+msg.sender+) that creates the +METoken+ contract.
 
@@ -389,7 +390,7 @@ image::images/ganache_metoken.png["METoken deployment on Ganache"]
 [[truffle_console]]
 ### *** Interacting with METoken using the Truffle console
 
-((("METoken (Mastering Ethereum Token)","interacting with via Truffle console", id="ix_10tokens-asciidoc11", range="startofrange")))((("Truffle","interacting with METoken via Truffle console", id="ix_10tokens-asciidoc12", range="startofrange")))We can interact with our contract on the +ganache+ blockchain using the Truffle console. This is an interactive JavaScript environment that provides access to the Truffle environment and, via web3, to the blockchain. In this case, we will connect the Truffle console to the +ganache+ blockchain:
+We can interact with our contract on the +ganache+ blockchain using the Truffle console. This is an interactive JavaScript environment that provides access to the Truffle environment and, via web3, to the blockchain. In this case, we will connect the Truffle console to the +ganache+ blockchain:
 
 ++++
 <pre data-type="programlist">
@@ -468,25 +469,22 @@ Finally, let's transfer 1000.00 METoken from +accounts[0]+ to +accounts[1]+, by 
 
 ++++
 <pre data-type="programlist">
-truffle(ganache)&gt; <strong>METoken.deployed().then(instance =>
-                  { instance.transfer(accounts[1], 100000) })</strong>
+truffle(ganache)&gt; <strong>METoken.deployed().then(instance => { instance.transfer(accounts[1], 100000) })</strong>
 undefined
-truffle(ganache)&gt; <strong>METoken.deployed().then(instance =>
-                  { instance.balanceOf(accounts[0]).then(console.log) })</strong>
+truffle(ganache)&gt; <strong>METoken.deployed().then(instance => { instance.balanceOf(accounts[0]).then(console.log) })</strong>
 undefined
 truffle(ganache)&gt; <strong>BigNumber { s: 1, e: 9, c: [ 2099900000 ] }</strong>
 undefined
-truffle(ganache)&gt; <strong>METoken.deployed().then(instance =>
-                  { instance.balanceOf(accounts[1]).then(console.log) })</strong>
+truffle(ganache)&gt; <strong>METoken.deployed().then(instance => { instance.balanceOf(accounts[1]).then(console.log) })</strong>
 undefined
 truffle(ganache)&gt; <strong>BigNumber { s: 1, e: 5, c: [ 100000 ] }</strong>
 </pre>
 ++++
 
 [TIP]
-====
+### ***
 METoken has 2 decimals of precision, meaning that 1 METoken is 100 units in the contract. When we transfer 1,000 METoken, we specify the value as +100000+ in the call to the +transfer+ function.
-====
+### ***
 
 As you can see, in the console, +accounts[0]+ now has 20,999,000 MET, and +accounts[1]+ has 1,000 MET.
 
@@ -499,7 +497,7 @@ image::images/ganache_metoken_transfer.png["METoken transfer on Ganache"]
 [[sending_erc20_tokens_contracts]]
 ### *** Sending ERC20 tokens to contract addresses
 
-((("Faucet.sol contract (test example)","METoken project", id="ix_10tokens-asciidoc13", range="startofrange")))((("METoken (Mastering Ethereum Token)","sending to contract addresses", id="ix_10tokens-asciidoc14", range="startofrange")))So far, we've set up an ERC20 token and transferred some tokens from one account to another. All the accounts we used for these demonstrations are externally owned accounts, meaning they are controlled by a private key, not a contract. What happens if we send MET to a contract address? Let's find out!
+So far, we've set up an ERC20 token and transferred some tokens from one account to another. All the accounts we used for these demonstrations are externally owned accounts, meaning they are controlled by a private key, not a contract. What happens if we send MET to a contract address? Let's find out!
 
 First, let's deploy another contract into our test environment. For this example, we will use our first contract, _Faucet.sol_. Let's add it to the METoken project by copying it to the _contracts_ directory. Our directory should look like this:
 
@@ -559,8 +557,7 @@ Great. Now let's send some MET to the +Faucet+ contract:
 
 ++++
 <pre data-type="programlist">
-truffle(ganache)&gt; <strong>METoken.deployed().then(instance =>
-                  { instance.transfer(Faucet.address, 100000) })</strong>
+truffle(ganache)&gt; <strong>METoken.deployed().then(instance => { instance.transfer(Faucet.address, 100000) })</strong>
 truffle(ganache)&gt; <strong>METoken.deployed().then(instance =>
                   { instance.balanceOf(Faucet.address).then(console.log)})</strong>
 truffle(ganache)&gt; <strong>BigNumber { s: 1, e: 5, c: [ 100000 ] }</strong>
@@ -590,12 +587,12 @@ Our new faucet contract, _METFaucet.sol_, will look like <<METFaucet>>.
 
 [[METFaucet]]
 .METFaucet.sol: A faucet for METoken
-====
+### ***
 [source,solidity,linenums]
 ----
 include::code/truffle/METoken_METFaucet/contracts/METFaucet.sol[]
 ----
-====
+### ***
 
 We've made quite a few changes to the basic +Faucet+ example. Since +METFaucet+ will use the +transferFrom+ function in +METoken+, it will need two additional variables. One will hold the address of the deployed +METoken+ contract. The other will hold the address of the owner of the MET, who will approve the faucet withdrawals. The +METFaucet+ contract will call +METoken.transferFrom+ and instruct it to move MET from the owner to the address where the faucet withdrawal request came from.
 
@@ -699,7 +696,7 @@ As you can see from the results, we can use the +approve+ &amp; +transferFrom+ w
 However, the burden of managing ERC20 tokens correctly is pushed to the user interface. If a user incorrectly attempts to transfer ERC20 tokens to a contract address and that contract is not equipped to receive ERC20 tokens, the tokens will be lost(((range="endofrange", startref="ix_10tokens-asciidoc17")))(((range="endofrange", startref="ix_10tokens-asciidoc16")))(((range="endofrange", startref="ix_10tokens-asciidoc15"))).(((range="endofrange", startref="ix_10tokens-asciidoc10")))(((range="endofrange", startref="ix_10tokens-asciidoc9")))
 
 [[ERC20_issues]]
-==== Issues with ERC20 Tokens
+### *** Issues with ERC20 Tokens
 
 The adoption of the ERC20 token standard has been truly explosive. Thousands of tokens have been launched, both to experiment with new capabilities and to raise funds in various "crowdfund" auctions and ICOs. However, there are some potential pitfalls, as we saw with the issue of transferring tokens to contract addresses.
 
@@ -716,7 +713,7 @@ Some of these issues are specific to ERC20 tokens. Others are more general issue
 In the next sections we will look at various proposals that attempt to address some of these issues.
 
 [[ERC223_std]]
-==== ERC223: A Proposed Token Contract Interface Standard
+### *** ERC223: A Proposed Token Contract Interface Standard
 
 The ERC223 proposal attempts to solve the problem of inadvertent transfer of tokens to a contract (that may or may not support tokens) by detecting whether the destination address is a contract or not. ERC223 requires that contracts designed to accept tokens implement a function named +tokenFallback+. If the destination of a transfer is a contract and the contract does not have support for tokens (i.e., does not implement +tokenFallback+), the transfer fails.
 
@@ -751,17 +748,15 @@ interface ERC223Token {
 
   function transfer(address to, uint value) public returns (bool ok);
   function transfer(address to, uint value, bytes data) public returns (bool ok);
-  function transfer(address to, uint value, bytes data, string custom_fallback)
-      public returns (bool ok);
+  function transfer(address to, uint value, bytes data, string custom_fallback) public returns (bool ok);
 
-  event Transfer(address indexed from, address indexed to, uint value,
-                 bytes indexed data);
+  event Transfer(address indexed from, address indexed to, uint value, bytes indexed data);
 }
 ----
 
 ERC223 is not widely implemented, and there is some debate in https://github.com/ethereum/EIPs/issues/223[the ERC discussion] thread about backward compatibility and trade-offs between implementing changes at the contract interface level versus the user interface. The debate continues.
 
-==== ERC777: A Proposed Token Contract Interface Standard
+### *** ERC777: A Proposed Token Contract Interface Standard
 
 ((("ERC777 token standard proposal", id="ix_10tokens-asciidoc18", range="startofrange")))((("tokens","ERC777 standard proposal", id="ix_10tokens-asciidoc19", range="startofrange")))Another proposal for an improved token contract standard is https://eips.ethereum.org/EIPS/eip-777[ERC777]. This proposal has several goals, including:
 
@@ -850,7 +845,7 @@ On the other hand, the same token sender and token recipient hooks can be regist
 A http://bit.ly/2qkAKba[reference implementation] of ERC777 is linked in the proposal. ERC777 depends on a parallel proposal for a registry contract, specified in ERC820. Some of the debate on ERC777 is about the complexity of adopting two big changes at once: a new token standard and a registry standard. The discussion continues.(((range="endofrange", startref="ix_10tokens-asciidoc19")))(((range="endofrange", startref="ix_10tokens-asciidoc18")))
 
 [[erc721]]
-==== ERC721: Non-fungible Token (Deed) Standard
+### *** ERC721: Non-fungible Token (Deed) Standard
 
 ((("deed","and ERC721 non-fungible token standard", id="ix_10tokens-asciidoc20", range="startofrange")))((("ERC721 non-fungible token standard", id="ix_10tokens-asciidoc21", range="startofrange")))((("non-fungible tokens (NFTs)","ERC721 non-fungible token standard", id="ix_10tokens-asciidoc22", range="startofrange")))((("tokens","ERC721 non-fungible token standard", id="ix_10tokens-asciidoc23", range="startofrange")))All the token standards we have looked at so far are for _fungible_ tokens, meaning that units of a token are interchangeable. The ERC20 token standard only tracks the final balance of each account and does not (explicitly) track the provenance of any token.
 
@@ -937,7 +932,7 @@ interface ERC721Enumerable /* is ERC721 */ {
 ((("token standards (generally)", seealso="specific standards, e.g.: ERC20 token standard", id="ix_10tokens-asciidoc24", range="startofrange")))((("tokens","using token standards", id="ix_10tokens-asciidoc25", range="startofrange")))In the previous section we reviewed several proposed standards and a couple of widely deployed standards for token contracts. What exactly do these standards do? Should you use these standards? How should you use them? Should you add functionality beyond these standards? Which standards should you use? We will examine some of those questions next.
 
 [[token_std_purpose]]
-==== What Are Token Standards? What Is Their Purpose?
+### *** What Are Token Standards? What Is Their Purpose?
 
 ((("token standards (generally)","defined")))Token standards are the _minimum_ specifications for an implementation. What that means is that in order to be compliant with, say, ERC20, you need to at minimum implement the functions and behavior specified by the ERC20 standard. You are also free to _add_ to the functionality by implementing functions that are not part of the standard.
 
@@ -946,7 +941,7 @@ interface ERC721Enumerable /* is ERC721 */ {
 The standards are meant to be _descriptive_, rather than _prescriptive_. How you choose to implement those functions is up to you-the internal functioning of the contract is not relevant to the standard. They have some functional requirements, which govern the behavior under specific circumstances, but they do not prescribe an implementation. An example of this is the behavior of a +transfer+ function if the value is set to zero.
 
 [[should_use_std]]
-==== Should You Use These Standards?
+### *** Should You Use These Standards?
 
 ((("token standards (generally)","reasons to use")))Given all these standards, each developer faces a dilemma: use the existing standards or innovate beyond the restrictions they impose?
 
@@ -955,13 +950,13 @@ This dilemma is not easy to resolve. Standards necessarily restrict your ability
 As part of this consideration is an even bigger issue: the value of interoperability and broad adoption. If you choose to use an existing standard, you gain the value of all the systems designed to work with that standard. If you choose to depart from the standard, you have to consider the cost of building all of the support infrastructure on your own, or persuading others to support your implementation as a new standard. The tendency to forge your own path and ignore existing standards is known as "Not Invented Here" syndrome and is antithetical to open source culture. On the other hand, progress and innovation depend on departing from tradition sometimes. It's a tricky choice, so consider it carefully!
 
 [NOTE]
-====
+### ***
 Per Wikipedia, https://en.wikipedia.org/wiki/Not_invented_here[&#x201c;Not Invented Here&#x201d;] is a stance adopted by social, corporate, or institutional cultures that avoid using or buying already existing products, research, standards, or knowledge because of their external origins and costs, such as royalties.
-====
+### ***
 
 
 [[security_maturity]]
-==== Security by Maturity
+### *** Security by Maturity
 
 ((("security (smart contracts)","token standard implementation choices")))((("token standards (generally)","implementation choices")))Beyond the choice of standard, there is the parallel choice of _implementation_. When you decide to use a standard such as ERC20, you have to then decide how to implement a compatible design. There are a number of existing "reference" implementations that are widely used in the Ethereum ecosystem, or you could write your own from scratch. Again, this choice represents a dilemma that can have serious security implications.
 
@@ -970,9 +965,9 @@ Existing implementations are &#x201c;battle-tested.&#x201d; While it is impossib
 If you use an existing implementation you can also extend it. Again, however, be careful with this impulse. Complexity is the enemy of security. ((("attack surface")))Every single line of code you add expands the _attack surface_ of your contract and could represent a vulnerability lying in wait. You may not notice a problem until you put a lot of value on top of the contract and someone breaks it.
 
 [TIP]
-====
+### ***
 Standards and implementation choices are important parts of overall secure smart contract design, but they're not the only considerations. See <<smart_contract_security>>.(((range="endofrange", startref="ix_10tokens-asciidoc25")))(((range="endofrange", startref="ix_10tokens-asciidoc24")))
-====
+### ***
 
 
 [[extend_token_interface]]
