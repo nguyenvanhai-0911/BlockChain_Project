@@ -701,7 +701,7 @@ However, the burden of managing ERC20 tokens correctly is pushed to the user int
 [[ERC20_issues]]
 ==== Issues with ERC20 Tokens
 
-((("ERC20 token standard","issues with ERC20 tokens")))The adoption of the ERC20 token standard has been truly explosive. Thousands of tokens have been launched, both to experiment with new capabilities and to raise funds in various "crowdfund" auctions and ICOs. However, there are some potential pitfalls, as we saw with the issue of transferring tokens to contract addresses.
+The adoption of the ERC20 token standard has been truly explosive. Thousands of tokens have been launched, both to experiment with new capabilities and to raise funds in various "crowdfund" auctions and ICOs. However, there are some potential pitfalls, as we saw with the issue of transferring tokens to contract addresses.
 
 One of the less obvious issues with ERC20 tokens is that they expose subtle differences between tokens and ether itself. Where ether is transferred by a transaction that has a recipient address as its destination, token transfers occur within the _specific token contract state_ and have the token contract as their destination, not the recipient's address. The token contract tracks balances and issues events. In a token transfer, no transaction is actually sent to the recipient of the token. Instead, the recipient's address is added to a map within the token contract itself. A transaction sending ether to an address changes the state of an address. A transaction transferring a token to an address only changes the state of the token contract, not the state of the recipient address. Even a wallet that has support for ERC20 tokens does not become aware of a token balance unless the user explicitly adds a specific token contract to "watch." Some wallets watch the most popular token contracts to detect balances held by addresses they control, but that's limited to a small fraction of existing ERC20 pass:[<span class="keep-together">contracts</span>].
 
@@ -709,7 +709,7 @@ In fact, it's unlikely that a user would _want_ to track all balances in all pos
 
 Tokens don't behave the same way as ether. Ether is sent with the +send+ function and accepted by any payable function in a contract or any externally owned address. Tokens are sent using +transfer+ or +approve+ & +transferFrom+ functions that exist only in the ERC20 contract, and do not (at least in ERC20) trigger any payable functions in a recipient contract. Tokens are meant to function just like a cryptocurrency such as ether, but they come with certain differences that break that illusion.
 
-((("gas","tokens and")))((("tokens","gas and")))Consider another issue. To send ether or use any Ethereum contract you need ether to pay for gas. To send tokens, you _also need ether_. You cannot pay for a transaction's gas with a token and the token contract can't pay for the gas for you. This may change at some point in the distant future, but in the meantime this can cause some rather strange user experiences. For example, let's say you use an exchange or ShapeShift to convert some bitcoin to a token. You "receive" the token in a wallet that tracks that token's contract and shows your balance. It looks the same as any of the other cryptocurrencies you have in your wallet. Try sending the token, though, and your wallet will inform you that you need ether to do that. You might be confused&#x2014;after all, you didn't need ether to receive the token. Perhaps you have no ether. Perhaps you didn't even know the token was an ERC20 token on Ethereum; maybe you thought it was a cryptocurrency with its own blockchain. The illusion just broke.
+Consider another issue. To send ether or use any Ethereum contract you need ether to pay for gas. To send tokens, you _also need ether_. You cannot pay for a transaction's gas with a token and the token contract can't pay for the gas for you. This may change at some point in the distant future, but in the meantime this can cause some rather strange user experiences. For example, let's say you use an exchange or ShapeShift to convert some bitcoin to a token. You "receive" the token in a wallet that tracks that token's contract and shows your balance. It looks the same as any of the other cryptocurrencies you have in your wallet. Try sending the token, though, and your wallet will inform you that you need ether to do that. You might be confused-after all, you didn't need ether to receive the token. Perhaps you have no ether. Perhaps you didn't even know the token was an ERC20 token on Ethereum; maybe you thought it was a cryptocurrency with its own blockchain. The illusion just broke.
 
 Some of these issues are specific to ERC20 tokens. Others are more general issues that relate to abstraction and interface boundaries within Ethereum. Some can be solved by changing the token interface, while others may need changes to fundamental structures within Ethereum (such as the distinction between EOAs and contracts, and between transactions and messages). Some may not be "solvable" exactly and may require user interface design to hide the nuances and make the user experience consistent regardless of the underlying distinctions.
 
@@ -718,7 +718,7 @@ In the next sections we will look at various proposals that attempt to address s
 [[ERC223_std]]
 ==== ERC223: A Proposed Token Contract Interface Standard
 
-((("ERC223 token standard proposal")))((("tokens","ERC223 standard proposal")))The ERC223 proposal attempts to solve the problem of inadvertent transfer of tokens to a contract (that may or may not support tokens) by detecting whether the destination address is a contract or not. ERC223 requires that contracts designed to accept tokens implement a function named +tokenFallback+. If the destination of a transfer is a contract and the contract does not have support for tokens (i.e., does not implement +tokenFallback+), the transfer fails.
+The ERC223 proposal attempts to solve the problem of inadvertent transfer of tokens to a contract (that may or may not support tokens) by detecting whether the destination address is a contract or not. ERC223 requires that contracts designed to accept tokens implement a function named +tokenFallback+. If the destination of a transfer is a contract and the contract does not have support for tokens (i.e., does not implement +tokenFallback+), the transfer fails.
 
 [[is_contract]]
 To detect whether the destination address is a contract, the ERC223 reference implementation uses a small segment of inline bytecode in a rather creative way:
@@ -862,7 +862,7 @@ ____
 _deed_: A legal document that is signed and delivered, especially one regarding the ownership of property or legal rights.
 ____
 
-The use of the word "deed" is intended to reflect the "ownership of property" part, even though these are not recognized as "legal documents" in any jurisdiction&#x2014;yet. It is likely that at some point in the future, legal ownership based on digital signatures on a blockchain platform will be legally recognized.
+The use of the word "deed" is intended to reflect the "ownership of property" part, even though these are not recognized as "legal documents" in any jurisdiction-yet. It is likely that at some point in the future, legal ownership based on digital signatures on a blockchain platform will be legally recognized.
 
 Non-fungible tokens track ownership of a unique thing. The thing owned can be a digital item, such as an in-game item or digital collectible; or the thing can be a physical item whose ownership is tracked by a token, such as a house, a car, or an artwork. Deeds can also represent things with negative value, such as loans (debt), liens, easements, etc. The ERC721 standard places no limitation or expectation on the nature of the thing whose ownership is tracked by a deed and requires only that it can be uniquely identified, which in the case of this standard is achieved by a 256-bit pass:[<span class="keep-together">identifier</span>].
 
@@ -890,16 +890,13 @@ The ERC721 contract interface specification is:
 ----
 interface ERC721 /* is ERC165 */ {
     event Transfer(address indexed _from, address indexed _to, uint256 _deedId);
-    event Approval(address indexed _owner, address indexed _approved,
-                   uint256 _deedId);
-    event ApprovalForAll(address indexed _owner, address indexed _operator,
-                         bool _approved);
+    event Approval(address indexed _owner, address indexed _approved, uint256 _deedId);
+    event ApprovalForAll(address indexed _owner, address indexed _operator, bool _approved);
 
     function balanceOf(address _owner) external view returns (uint256 _balance);
     function ownerOf(uint256 _deedId) external view returns (address _owner);
     function transfer(address _to, uint256 _deedId) external payable;
-    function transferFrom(address _from, address _to, uint256 _deedId)
-        external payable;
+    function transferFrom(address _from, address _to, uint256 _deedId) external payable;
     function approve(address _approved, uint256 _deedId) external payable;
     function setApprovalForAll(address _operator, boolean _approved) payable;
     function supportsInterface(bytes4 interfaceID) external view returns (bool);
@@ -930,8 +927,7 @@ interface ERC721Enumerable /* is ERC721 */ {
     function deedByIndex(uint256 _index) external view returns (uint256 _deedId);
     function countOfOwners() external view returns (uint256 _count);
     function ownerByIndex(uint256 _index) external view returns (address _owner);
-    function deedOfOwnerByIndex(address _owner, uint256 _index) external view
-        returns (uint256 _deedId);
+    function deedOfOwnerByIndex(address _owner, uint256 _index) external view returns (uint256 _deedId);
 }
 ----
 
@@ -947,7 +943,7 @@ interface ERC721Enumerable /* is ERC721 */ {
 
 ((("token standards (generally)","purpose of")))The primary purpose of these standards is to encourage _interoperability_ between contracts. Thus, all wallets, exchanges, user interfaces, and other infrastructure components can _interface_ in a predictable manner with any contract that follows the specification. In other words, if you deploy a contract that follows the ERC20 standard, all existing wallet users can seamlessly start trading your token without any wallet upgrade or effort on your part.
 
-The standards are meant to be _descriptive_, rather than _prescriptive_. How you choose to implement those functions is up to you&#x2014;the internal functioning of the contract is not relevant to the standard. They have some functional requirements, which govern the behavior under specific circumstances, but they do not prescribe an implementation. An example of this is the behavior of a +transfer+ function if the value is set to zero.
+The standards are meant to be _descriptive_, rather than _prescriptive_. How you choose to implement those functions is up to you-the internal functioning of the contract is not relevant to the standard. They have some functional requirements, which govern the behavior under specific circumstances, but they do not prescribe an implementation. An example of this is the behavior of a +transfer+ function if the value is set to zero.
 
 [[should_use_std]]
 ==== Should You Use These Standards?
@@ -969,7 +965,7 @@ Per Wikipedia, https://en.wikipedia.org/wiki/Not_invented_here[&#x201c;Not Inven
 
 ((("security (smart contracts)","token standard implementation choices")))((("token standards (generally)","implementation choices")))Beyond the choice of standard, there is the parallel choice of _implementation_. When you decide to use a standard such as ERC20, you have to then decide how to implement a compatible design. There are a number of existing "reference" implementations that are widely used in the Ethereum ecosystem, or you could write your own from scratch. Again, this choice represents a dilemma that can have serious security implications.
 
-Existing implementations are &#x201c;battle-tested.&#x201d; While it is impossible to prove that they are secure, many of them underpin millions of dollars' worth of tokens. They have been attacked, repeatedly and vigorously. So far, no significant vulnerabilities have been discovered. Writing your own is not easy&#x2014;there are many subtle ways that a contract can be compromised. It is much safer to use a well-tested, widely used implementation. In our examples, we used the OpenZeppelin implementation of the ERC20 standard, as this implementation is security-focused from the ground up.
+Existing implementations are &#x201c;battle-tested.&#x201d; While it is impossible to prove that they are secure, many of them underpin millions of dollars' worth of tokens. They have been attacked, repeatedly and vigorously. So far, no significant vulnerabilities have been discovered. Writing your own is not easy-there are many subtle ways that a contract can be compromised. It is much safer to use a well-tested, widely used implementation. In our examples, we used the OpenZeppelin implementation of the ERC20 standard, as this implementation is security-focused from the ground up.
 
 If you use an existing implementation you can also extend it. Again, however, be careful with this impulse. Complexity is the enemy of security. ((("attack surface")))Every single line of code you add expands the _attack surface_ of your contract and could represent a vulnerability lying in wait. You may not notice a problem until you put a lot of value on top of the contract and someone breaks it.
 
@@ -1007,7 +1003,7 @@ As previously discussed, the decision to extend a token standard with additional
 [[tokens_ico]]
 === Tokens and ICOs
 
-((("Initial Coin Offerings (ICOs)","tokens and")))((("tokens","ICOs and")))Tokens have been an explosive development in the Ethereum ecosystem. It is likely that they will become a very important component of all smart contract platforms like Ethereum.
+Tokens have been an explosive development in the Ethereum ecosystem. It is likely that they will become a very important component of all smart contract platforms like Ethereum.
 
 Nevertheless, the importance and future impact of these standards should not be confused with an endorsement of current token offerings. As in any early-stage technology, the first wave of products and companies will almost all fail, and some will fail spectacularly. Many of the tokens on offer in Ethereum today are barely disguised scams, pyramid schemes, and money grabs.
 
