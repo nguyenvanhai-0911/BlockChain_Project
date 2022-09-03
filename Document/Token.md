@@ -789,20 +789,13 @@ interface ERC777Token {
 
     function authorizeOperator(address operator) public;
     function revokeOperator(address operator) public;
-    function isOperatorFor(address operator, address tokenHolder)
-        public constant returns (bool);
-    function operatorSend(address from, address to, uint256 amount,
-                          bytes userData,bytes operatorData) public;
+    function isOperatorFor(address operator, address tokenHolder) public constant returns (bool);
+    function operatorSend(address from, address to, uint256 amount, bytes userData,bytes operatorData) public;
 
-    event Sent(address indexed operator, address indexed from,
-               address indexed to, uint256 amount, bytes userData,
-               bytes operatorData);
-    event Minted(address indexed operator, address indexed to,
-                 uint256 amount, bytes operatorData);
-    event Burned(address indexed operator, address indexed from,
-                 uint256 amount, bytes userData, bytes operatorData);
-    event AuthorizedOperator(address indexed operator,
-                             address indexed tokenHolder);
+    event Sent(address indexed operator, address indexed from, address indexed to, uint256 amount, bytes userData, bytes operatorData);
+    event Minted(address indexed operator, address indexed to, uint256 amount, bytes operatorData);
+    event Burned(address indexed operator, address indexed from, uint256 amount, bytes userData, bytes operatorData);
+    event AuthorizedOperator(address indexed operator, address indexed tokenHolder);
     event RevokedOperator(address indexed operator, address indexed tokenHolder);
 }
 ----
@@ -816,8 +809,7 @@ The ERC777 tokens sender hook specification is:
 [source,solidity]
 ----
 interface ERC777TokensSender {
-    function tokensToSend(address operator, address from, address to,
-                          uint value, bytes userData, bytes operatorData) public;
+    function tokensToSend(address operator, address from, address to, uint value, bytes userData, bytes operatorData) public;
 }
 ----
 
@@ -829,10 +821,7 @@ The ERC777 tokens recipient hook specification is:
 [source,solidity]
 ----
 interface ERC777TokensRecipient {
-  function tokensReceived(
-     address operator, address from, address to,
-    uint amount, bytes userData, bytes operatorData
-  ) public;
+  function tokensReceived( address operator, address from, address to,uint amount, bytes userData, bytes operatorData) public;
 }
 ----
 
@@ -929,21 +918,21 @@ interface ERC721Enumerable /* is ERC721 */ {
 [[token_std_review]]
 === Using Token Standards
 
-((("token standards (generally)", seealso="specific standards, e.g.: ERC20 token standard", id="ix_10tokens-asciidoc24", range="startofrange")))((("tokens","using token standards", id="ix_10tokens-asciidoc25", range="startofrange")))In the previous section we reviewed several proposed standards and a couple of widely deployed standards for token contracts. What exactly do these standards do? Should you use these standards? How should you use them? Should you add functionality beyond these standards? Which standards should you use? We will examine some of those questions next.
+In the previous section we reviewed several proposed standards and a couple of widely deployed standards for token contracts. What exactly do these standards do? Should you use these standards? How should you use them? Should you add functionality beyond these standards? Which standards should you use? We will examine some of those questions next.
 
 [[token_std_purpose]]
 ### *** What Are Token Standards? What Is Their Purpose?
 
-((("token standards (generally)","defined")))Token standards are the _minimum_ specifications for an implementation. What that means is that in order to be compliant with, say, ERC20, you need to at minimum implement the functions and behavior specified by the ERC20 standard. You are also free to _add_ to the functionality by implementing functions that are not part of the standard.
+Token standards are the _minimum_ specifications for an implementation. What that means is that in order to be compliant with, say, ERC20, you need to at minimum implement the functions and behavior specified by the ERC20 standard. You are also free to _add_ to the functionality by implementing functions that are not part of the standard.
 
-((("token standards (generally)","purpose of")))The primary purpose of these standards is to encourage _interoperability_ between contracts. Thus, all wallets, exchanges, user interfaces, and other infrastructure components can _interface_ in a predictable manner with any contract that follows the specification. In other words, if you deploy a contract that follows the ERC20 standard, all existing wallet users can seamlessly start trading your token without any wallet upgrade or effort on your part.
+The primary purpose of these standards is to encourage _interoperability_ between contracts. Thus, all wallets, exchanges, user interfaces, and other infrastructure components can _interface_ in a predictable manner with any contract that follows the specification. In other words, if you deploy a contract that follows the ERC20 standard, all existing wallet users can seamlessly start trading your token without any wallet upgrade or effort on your part.
 
 The standards are meant to be _descriptive_, rather than _prescriptive_. How you choose to implement those functions is up to you-the internal functioning of the contract is not relevant to the standard. They have some functional requirements, which govern the behavior under specific circumstances, but they do not prescribe an implementation. An example of this is the behavior of a +transfer+ function if the value is set to zero.
 
 [[should_use_std]]
 ### *** Should You Use These Standards?
 
-((("token standards (generally)","reasons to use")))Given all these standards, each developer faces a dilemma: use the existing standards or innovate beyond the restrictions they impose?
+Given all these standards, each developer faces a dilemma: use the existing standards or innovate beyond the restrictions they impose?
 
 This dilemma is not easy to resolve. Standards necessarily restrict your ability to innovate, by creating a narrow "rut" that you have to follow. On the other hand, the basic standards have emerged from experience with hundreds of applications and often fit well with the vast majority of use cases.
 
@@ -958,7 +947,7 @@ Per Wikipedia, https://en.wikipedia.org/wiki/Not_invented_here[&#x201c;Not Inven
 [[security_maturity]]
 ### *** Security by Maturity
 
-((("security (smart contracts)","token standard implementation choices")))((("token standards (generally)","implementation choices")))Beyond the choice of standard, there is the parallel choice of _implementation_. When you decide to use a standard such as ERC20, you have to then decide how to implement a compatible design. There are a number of existing "reference" implementations that are widely used in the Ethereum ecosystem, or you could write your own from scratch. Again, this choice represents a dilemma that can have serious security implications.
+Beyond the choice of standard, there is the parallel choice of _implementation_. When you decide to use a standard such as ERC20, you have to then decide how to implement a compatible design. There are a number of existing "reference" implementations that are widely used in the Ethereum ecosystem, or you could write your own from scratch. Again, this choice represents a dilemma that can have serious security implications.
 
 Existing implementations are &#x201c;battle-tested.&#x201d; While it is impossible to prove that they are secure, many of them underpin millions of dollars' worth of tokens. They have been attacked, repeatedly and vigorously. So far, no significant vulnerabilities have been discovered. Writing your own is not easy-there are many subtle ways that a contract can be compromised. It is much safer to use a well-tested, widely used implementation. In our examples, we used the OpenZeppelin implementation of the ERC20 standard, as this implementation is security-focused from the ground up.
 
@@ -973,7 +962,7 @@ Standards and implementation choices are important parts of overall secure smart
 [[extend_token_interface]]
 === Extensions to Token Interface Standards
 
-((("token standards (generally)","extensions to")))The token standards discussed in this chapter provide a very minimal interface, with limited functionality. Many projects have created extended implementations to support features that they need for their applications. Some of these features include:
+The token standards discussed in this chapter provide a very minimal interface, with limited functionality. Many projects have created extended implementations to support features that they need for their applications. Some of these features include:
 
 Owner control:: The ability to give specific addresses, or sets of addresses (i.e., multisignature schemes), special capabilities, such as blacklisting, whitelisting, minting, recovery, etc.
 
