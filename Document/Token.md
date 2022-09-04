@@ -916,7 +916,7 @@ interface ERC721Enumerable /* is ERC721 */ {
 ----
 
 [[token_std_review]]
-=== Using Token Standards
+### *** Using Token Standards
 
 In the previous section we reviewed several proposed standards and a couple of widely deployed standards for token contracts. What exactly do these standards do? Should you use these standards? How should you use them? Should you add functionality beyond these standards? Which standards should you use? We will examine some of those questions next.
 
@@ -960,7 +960,7 @@ Standards and implementation choices are important parts of overall secure smart
 
 
 [[extend_token_interface]]
-=== Extensions to Token Interface Standards
+### *** Extensions to Token Interface Standards
 
 The token standards discussed in this chapter provide a very minimal interface, with limited functionality. Many projects have created extended implementations to support features that they need for their applications. Some of these features include:
 
@@ -985,7 +985,7 @@ There are reference implementations for many of these functions, for example in 
 As previously discussed, the decision to extend a token standard with additional functionality represents a trade-off between innovation/risk and interoperability/security.
 
 [[tokens_ico]]
-=== Tokens and ICOs
+### *** Tokens and ICOs
 
 Tokens have been an explosive development in the Ethereum ecosystem. It is likely that they will become a very important component of all smart contract platforms like Ethereum.
 
@@ -993,6 +993,6 @@ Nevertheless, the importance and future impact of these standards should not be 
 
 The trick is to separate the long-term vision and impact of this technology, which is likely to be huge, from the short-term bubble of token ICOs, which are rife with fraud. Token standards and the platform will survive the current token mania, and then they will likely change the world.
 
-=== Conclusions
+### *** Conclusions
 
 Tokens are a very powerful concept in Ethereum and can form the basis of many important decentralized applications. In this chapter we looked at the different types of tokens and token standards, and you built your first token and related application. We will revisit tokens again in <<decentralized_applications_chap>>, where you will use a non-fungible token as the basis for an auction DApp.(((range="endofrange", startref="ix_10tokens-asciidoc0")))
