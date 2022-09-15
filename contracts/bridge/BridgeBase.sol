@@ -2,11 +2,11 @@
 pragma solidity ^0.8.9;
 
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
-import './Itoken.sol';
+import './ITokenERC20.sol';
 
 contract BridgeBase {
   address public admin;
-  IToken public token;
+  ITokenERC20 public token;
   mapping(address => mapping(uint => bool)) public processedNonces;
 
   enum Step { Burn, Mint }
@@ -22,7 +22,7 @@ contract BridgeBase {
 
   constructor(address _token) {
     admin = msg.sender;
-    token = IToken(_token);
+    token = ITokenERC20(_token);
   }
 
   function burn(address to, uint amount, uint nonce, bytes calldata signature) external {

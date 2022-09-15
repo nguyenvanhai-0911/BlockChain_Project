@@ -46,9 +46,7 @@ contract YBNFT is ERC721Upgradeable, OwnableUpgradeable {
         return baseURI;
     }
 
-    function setMinPriceAddListing(
-        uint256 value
-    ) external onlyOwner {
+    function setMinPriceAddListing(uint256 value) external onlyOwner {
         _minPriceAddListing = value;
     }
 
@@ -60,10 +58,7 @@ contract YBNFT is ERC721Upgradeable, OwnableUpgradeable {
         return id;
     }
 
-    function mintBatchAdmin(
-        address minter,
-        uint256 amount
-    ) external onlyOwner {
+    function mintBatchAdmin(address minter, uint256 amount) external onlyOwner {
         for (uint256 i = 0; i < amount; i++) {
             uint256 tokenId = nextTokenId;
             _safeMint(minter, tokenId);

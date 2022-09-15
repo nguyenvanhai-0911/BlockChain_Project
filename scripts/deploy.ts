@@ -1,22 +1,24 @@
-import { ethers } from "hardhat";
+import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { Signer } from "ethers";
+import { ethers, upgrades, network } from "hardhat";
 
-async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+let [deployer, admin, user1, user2]: SignerWithAddress[] = [];
 
-  const lockedAmount = ethers.utils.parseEther("1");
+const deployContractYBNFT = async () => {
+  const YBFac = await ethers.getContractFactory("YBNFT");
+  const nftYB = await upgrades.deployProxy(YBFac, ["YB NFT", "YBNfts"]);
 
-  const Lock = await ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+  await nftYB.deployed();
 
-  await lock.deployed();
-
-  console.log("Lock with 1 ETH deployed to:", lock.address);
+  console.log("Address YBNfts", nftYB.address);
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
+async function main() {
+  [deployer] = await ethers.getSigners();
+
+  await deployContractYBNFT();
+}
+
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;

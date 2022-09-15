@@ -1,7 +1,7 @@
 import { ethers } from "hardhat";
 import {Signer} from "ethers";
 import {expect} from "chai";
-import {FaucetToken} from "../../typechain-types/contracts/token/ERC20_Token.sol/FaucetToken";
+import {FaucetToken} from "../../typechain-types/contracts/tokenERC20/ERC20_Token.sol/FaucetToken";
 
 let signers: Signer[];
 let deployer: Signer;

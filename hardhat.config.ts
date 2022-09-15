@@ -38,8 +38,8 @@ const config: HardhatUserConfig = {
     ],
   },
   networks: {
-    mumbai: {
-      url: "https://polygon-mumbai.g.alchemy.com/v2/7z572lXXuyfpl4wcS-faR81Oyobzb8Pj",
+    matic: {
+      url: `https://apis.ankr.com/e22bfa5f5a124b9aa1f911b742f6adfe/c06bb163c3c2a10a4028959f4d82836d/polygon/full/main`,
       accounts: [
         process.env.PRIVATE_KEY_DEPLOYER!,
         process.env.PRIVATE_KEY_ADMIN!,
@@ -49,7 +49,25 @@ const config: HardhatUserConfig = {
     },
     bsc_testnet: {
       chainId: 97,
-      url: "https://bsc-testnet.nodereal.io/v1/a1bdda211c0342bfa21bccfee5368c80",
+      url: "https://data-seed-prebsc-1-s1.binance.org:8545/",
+      accounts: [
+        process.env.PRIVATE_KEY_DEPLOYER!,
+        process.env.PRIVATE_KEY_ADMIN!,
+        process.env.PRIVATE_KEY_USER1!,
+        process.env.PRIVATE_KEY_USER2!,
+      ],
+    },
+    mumbai: {
+      url: "https://polygon-mumbai.g.alchemy.com/v2/7z572lXXuyfpl4wcS-faR81Oyobzb8Pj",
+      accounts: [
+        process.env.PRIVATE_KEY_DEPLOYER!,
+        process.env.PRIVATE_KEY_ADMIN!,
+        process.env.PRIVATE_KEY_USER1!,
+        process.env.PRIVATE_KEY_USER2!,
+      ],
+    },
+    rinkeby: {
+      url: `https://rinkeby.infura.io/v3/e0ba2c6ccb1e4704a5d63a52a4d9bbee`,
       accounts: [
         process.env.PRIVATE_KEY_DEPLOYER!,
         process.env.PRIVATE_KEY_ADMIN!,
@@ -65,10 +83,14 @@ const config: HardhatUserConfig = {
   etherscan: {
     // Your API key for Etherscan
     // Obtain one at https://bscscan.com/
+    // apiKey: process.env.BSCSCAN_APIKEY,
     // apiKey: 'H73WJKKZ7PP5WGF9C11EAPU8MJKY9BNHIJ',
     // apiKey: '4FIZ8WRNU47K26M8DG3YG5ZWR29V7EKAGY',
-    // apiKey: 'VWUW5SH2YZXQ2G1XSRHHFMWPBX9SEZ6SZK',
-    apiKey: process.env.BSCSCAN_APIKEY
+
+    apiKey: process.env.ETH_APIKEY
+
+    // apiKey: 'VWUW5SH2YZXQ2G1XSRHHFMWPBX9SEZ6SZK'
+    // apiKey: 'e0ba2c6ccb1e4704a5d63a52a4d9bbee'
   },
 };
 
