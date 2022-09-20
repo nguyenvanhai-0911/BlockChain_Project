@@ -13,10 +13,21 @@ const deployContractYBNFT = async () => {
   console.log("Address YBNfts", nftYB.address);
 }
 
+const deployContractSadNFT = async () => {
+  const sadFac = await ethers.getContractFactory("SadNFT");
+  const sadNFTs = await sadFac.deploy();
+
+  await sadNFTs.deployed();
+
+  console.log("Address Contract SadNFT", sadNFTs.address);
+  
+}
+
 async function main() {
   [deployer] = await ethers.getSigners();
 
-  await deployContractYBNFT();
+  // await deployContractYBNFT();
+  await deployContractSadNFT();
 }
 
 main().catch((error) => {
