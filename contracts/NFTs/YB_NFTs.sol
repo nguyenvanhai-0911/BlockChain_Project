@@ -42,11 +42,9 @@ contract YBNFT is ERC721Upgradeable, OwnableUpgradeable {
         baseURI = __baseURI;
     }
 
-    // function _baseURI() internal view override returns (string memory) {
-    //     return Strings.strConcat(
-    //         _baseURI()
-    //     )
-    // }
+    function _baseURI() internal view override returns (string memory) {
+        return baseURI;
+    }
 
     function setMinPriceAddListing(uint256 value) external onlyOwner {
         _minPriceAddListing = value;
