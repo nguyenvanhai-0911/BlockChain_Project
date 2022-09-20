@@ -6,14 +6,17 @@ import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol"
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/structs/EnumerableSetUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/security/PullPaymentUpgradeable.sol";
 
-contract YBNFT is ERC721Upgradeable, OwnableUpgradeable {
+contract YBNFT is ERC721Upgradeable, OwnableUpgradeable, PullPaymentUpgradeable {
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.UintSet;
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.AddressSet;
 
     EnumerableSetUpgradeable.AddressSet private _admins;
 
     uint256 private _minPriceAddListing;
+    uint256 public Total_Supply;
+    uint256 public Mint_Price;
     uint256 public nextTokenId;
     string public baseURI;
 
@@ -31,6 +34,8 @@ contract YBNFT is ERC721Upgradeable, OwnableUpgradeable {
 
         _admins.add(msg.sender);
 
+        Total_Supply = 10000;
+        Mint_Price = 0.08 ether;
         nextTokenId = 1;
     }
 
@@ -50,7 +55,10 @@ contract YBNFT is ERC721Upgradeable, OwnableUpgradeable {
         _minPriceAddListing = value;
     }
 
-    function safeMint(address minter) external onlyAdmin returns (uint256) {
+    function safeMint(address minter) external payable onlyAdmin returns (uint256) {
+        require(nextTokenId < Total_Supply, "Max supply reached");
+        require(msg.value == Mint_Price, "Transaction value did not equal the mint price");
+
         uint256 id = nextTokenId;
         _safeMint(minter, id);
         nextTokenId++;
@@ -68,6 +76,10 @@ contract YBNFT is ERC721Upgradeable, OwnableUpgradeable {
 
     function burn(uint256 tokenId) external onlyAdmin {
         _burn(tokenId);
+    }
+
+    function withdrawPayments(address payable payee) public override onlyOwner virtual {
+        super.withdrawPayments(payee);
     }
 
     function transferToken(IERC20Upgradeable token, uint256 amount, address to) external onlyOwner {
