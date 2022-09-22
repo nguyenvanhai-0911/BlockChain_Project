@@ -6,9 +6,8 @@ import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol"
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/structs/EnumerableSetUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/security/PullPaymentUpgradeable.sol";
 
-contract YBNFT is ERC721Upgradeable, OwnableUpgradeable, PullPaymentUpgradeable {
+contract YBNFT is ERC721Upgradeable, OwnableUpgradeable {
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.UintSet;
     using EnumerableSetUpgradeable for EnumerableSetUpgradeable.AddressSet;
 
@@ -76,10 +75,6 @@ contract YBNFT is ERC721Upgradeable, OwnableUpgradeable, PullPaymentUpgradeable 
 
     function burn(uint256 tokenId) external onlyAdmin {
         _burn(tokenId);
-    }
-
-    function withdrawPayments(address payable payee) public override onlyOwner virtual {
-        super.withdrawPayments(payee);
     }
 
     function transferToken(IERC20Upgradeable token, uint256 amount, address to) external onlyOwner {

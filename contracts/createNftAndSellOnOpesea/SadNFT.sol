@@ -3,11 +3,10 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/security/PullPayment.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/interfaces/IERC20.sol";
 
-contract SadNFT is ERC721, PullPayment, Ownable {
+contract SadNFT is ERC721, Ownable {
     using Counters for Counters.Counter;
 
     // Constants
@@ -43,16 +42,6 @@ contract SadNFT is ERC721, PullPayment, Ownable {
     function setBaseTokenURI(string memory _baseTokenURI) public onlyOwner {
         baseTokenURI = _baseTokenURI;
     }
-
-    /// @dev Overridden in order to make it an onlyOwner function
-    // function withdrawPayments(address payable payee) public override onlyOwner virtual {
-    //     super.withdrawPayments(payee);
-    // }
-
-    // function sendViaCall(address payable _to) public payable onlyOwner virtual {
-    //     (bool sent, bytes memory data) = payable(_to).call{value: msg.value}("");
-    //     require(sent, "Failed to send Ether");
-    // }
 
     function transferToken(IERC20 token, uint256 amount, address to) external onlyOwner {
         if(address(token) == address(0)) {
