@@ -12,11 +12,12 @@ contract MyToken is ERC20Upgradeable, ERC721HolderUpgradeable, OwnableUpgradeabl
     mapping(uint256 => address) public tokenOwnerOf;
     mapping(uint256 => uint256) public tokenStakedAt;
 
-    uint256 public EMISSION_RATE = (100 * 10**decimals()) / 1 days;
+    uint256 public EMISSION_RATE; 
 
     function initialize(address _nft) public initializer {
         __ERC20_init("MyToken", "HaiToken");
         nft = IERC721Upgradeable(_nft);
+        EMISSION_RATE = (100 * 10**decimals()) / 1 days;
     }
 
     function stake(uint256 tokenId) external {
