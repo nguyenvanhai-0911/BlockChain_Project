@@ -1,4 +1,4 @@
-##  *** Ethereum Nodes (Clients) ***
+###     *** Ethereum Nodes (Clients) ***
 
 * Ethereum is a peer-to-peer network of computers named “Ethereum Nodes”. Anyone can run an Ethereum Node on its laptop or desktop machine (it require lots of resources).
 

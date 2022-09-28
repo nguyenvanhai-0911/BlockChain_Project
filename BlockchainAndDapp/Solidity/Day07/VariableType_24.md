@@ -1,18 +1,18 @@
-### *** Solidity Variables ***
+###     *** Solidity Variables ***
 Variable Types:
 1. State variables
-    ● Declared at contract level;
-    ● Permanently stored in contract storage;
-    ● Can be set as constants;
-    ● Expensive to use, they cost gas;
-    ● Initialized at declaration, using a constructor or after contract deployment by calling setters;
+    - Declared at contract level;
+    - Permanently stored in contract storage;
+    - Can be set as constants;
+    - Expensive to use, they cost gas;
+    - Initialized at declaration, using a constructor or after contract deployment by calling setters;
 
 2. Local variables
-    ● Declared inside functions;
-    ● If using the memory keyword and are arrays or struct, they are allocated at runtime. Memory keyword can’t be used at contract level
+    - Declared inside functions;
+    - If using the memory keyword and are arrays or struct, they are allocated at runtime. Memory keyword can’t be used at contract level
 
 
-### *** Where does EVM save data ?
+###     *** Where does EVM save data ?
 1. Storage
     - Holds state variables;
     - Persistent and expensive (it costs gas);

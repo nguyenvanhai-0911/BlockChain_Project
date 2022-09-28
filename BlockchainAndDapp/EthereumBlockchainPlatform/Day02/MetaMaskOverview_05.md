@@ -1,4 +1,4 @@
-### *** MetaMask Overview ***
+###      *** MetaMask Overview ***
 
 - OpenSource - the code can be reviewed and audited by the community;
 

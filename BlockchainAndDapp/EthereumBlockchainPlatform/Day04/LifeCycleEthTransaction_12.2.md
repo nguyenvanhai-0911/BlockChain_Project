@@ -1,4 +1,4 @@
-### *** Life Cycle of an Ethereum Transaction ***
+###     *** Life Cycle of an Ethereum Transaction ***
 
 1. The client constructs the raw transaction object;
 

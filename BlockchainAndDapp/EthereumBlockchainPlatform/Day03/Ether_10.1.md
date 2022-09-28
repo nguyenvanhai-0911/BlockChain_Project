@@ -1,4 +1,4 @@
-### *** Ether (ETH) ***
+###     *** Ether (ETH) ***
 
 - Ether having the ETH code and the Greek uppercase Xi character (Ξ) is the cryptocurrency used on the Ethereum Platform;
 

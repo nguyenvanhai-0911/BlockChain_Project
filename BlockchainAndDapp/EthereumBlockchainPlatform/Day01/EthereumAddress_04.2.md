@@ -1,4 +1,4 @@
-### ***  Ethereum Address ***
+###     ***  Ethereum Address ***
 
 - An EOA Address is derived from the last 20 bytes (160 bits) of the public key that are Keccak-256 hashed. It’s represented in a hexadecimal format, which is often indicated explicitly by appending 0x to the address
 

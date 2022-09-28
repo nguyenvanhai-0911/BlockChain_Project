@@ -1,4 +1,4 @@
-###  *** Externally Owned Account (EOA) ***
+###     *** Externally Owned Account (EOA) ***
 
 - Controlled by a private key and identified by an unique address;
 
@@ -7,7 +7,7 @@
 - Used for holding, sending and receiving ETH and for interacting with smart contracts (deployment, calling functions etc);
 
 
-### *** Contract Account (CA) ***
+###     *** Contract Account (CA) ***
 
 - Controlled by the contract code;
 
@@ -17,7 +17,7 @@
 
 - It holds an ETH balance like an EOA;
 
-###  ***  Ethereum Account Components ***
+###     *** Ethereum Account Components ***
 
 1. Nonce -> counter that indicates the number of transactions sent from the account (it ensure that the same transaction isn't submitted twice)
 

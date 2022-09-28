@@ -1,4 +1,4 @@
-### *** Ethereum 2.0 - Sharding ***
+###     *** Ethereum 2.0 - Sharding ***
 
 - Sharding is phase 2 of the upgrade to Ethereum 2.0.
 

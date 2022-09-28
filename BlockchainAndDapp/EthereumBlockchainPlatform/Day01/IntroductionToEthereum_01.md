@@ -1,4 +1,4 @@
-##  *** Introduction to Ethereum ***
+###      *** Introduction to Ethereum ***
 
 * Ethereum builds on Bitcoin's innovation, with some big improvements.
 

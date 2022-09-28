@@ -1,4 +1,4 @@
-### *** Ethereum Transactions ***
+###     *** Ethereum Transactions ***
 
 - Transactions are the heart of the Ethereum Blockchain. Interacting with the Ethereum Blockchain means executing transactions that update the blockchain state.
 

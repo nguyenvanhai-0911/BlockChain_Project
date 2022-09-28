@@ -1,4 +1,4 @@
-### *** Solidity Arrays ***
+###     *** Solidity Arrays ***
 
 1. Fixed-size
 - Has a compile-time fixed size.

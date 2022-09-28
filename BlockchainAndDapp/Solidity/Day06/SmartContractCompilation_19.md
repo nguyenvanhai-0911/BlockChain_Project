@@ -1,4 +1,4 @@
-### *** Smart Contract Compilation ***
+###     *** Smart Contract Compilation ***
 
 - The Solidity source code is passed to the solidity compiler and the compile returns the EVM bytecode that is deployed and the contract ABI - Abstract Binary Interface.
 

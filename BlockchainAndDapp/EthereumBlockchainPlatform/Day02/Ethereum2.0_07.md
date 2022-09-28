@@ -1,4 +1,4 @@
-### *** Ethereum 2.0 (ETH2 or Serenity) ***
+###     *** Ethereum 2.0 (ETH2 or Serenity) ***
 
 - ETH2 is an upgrade to the initial Ethereum protocol.
 
