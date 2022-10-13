@@ -11,7 +11,7 @@ contract SadNFT is ERC721, Ownable {
 
     // Constants
     uint256 public constant TOTAL_SUPPLY = 10_000;
-    uint256 public constant MINT_PRICE = 1 ether;
+    uint256 public constant MINT_PRICE = 0.0001 ether;
 
     Counters.Counter private currentTokenId;
 

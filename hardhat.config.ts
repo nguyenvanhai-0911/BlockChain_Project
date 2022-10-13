@@ -75,6 +75,16 @@ const config: HardhatUserConfig = {
         process.env.PRIVATE_KEY_USER2!,
       ],
     },
+    goerli: {
+      url: `https://eth-goerli.g.alchemy.com/v2/BPriwOuN_XIfpVcuIqTiGKGowr1E78Ro`,
+      accounts: [
+        process.env.PRIVATE_KEY_DEPLOYER!,
+        process.env.PRIVATE_KEY_ADMIN!,
+        process.env.PRIVATE_KEY_USER1!,
+        process.env.PRIVATE_KEY_USER2!,
+      ],
+    },
+
   },
   gasReporter: {
     enabled: true,
@@ -87,10 +97,15 @@ const config: HardhatUserConfig = {
     // apiKey: 'H73WJKKZ7PP5WGF9C11EAPU8MJKY9BNHIJ',
     // apiKey: '4FIZ8WRNU47K26M8DG3YG5ZWR29V7EKAGY',
 
-    apiKey: process.env.ETH_APIKEY
+    // apiKey: process.env.ETH_APIKEY
 
     // apiKey: 'VWUW5SH2YZXQ2G1XSRHHFMWPBX9SEZ6SZK'
     // apiKey: 'e0ba2c6ccb1e4704a5d63a52a4d9bbee'
+    // apiKey: {
+    //   goerli: `BPriwOuN_XIfpVcuIqTiGKGowr1E78Ro`
+    // }
+
+    apiKey: `Z8IHKHRSUF62QHH1QGQXXRBJFZZ2AY2AME`
   },
 };
 

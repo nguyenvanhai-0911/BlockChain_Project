@@ -31,10 +31,7 @@ const deployContractMyNft = async () => {
 
 const deployContractStakingToken = async () => {
   const MyTokenStakingFac = await ethers.getContractFactory("MyToken");
-  const myTokenStaking = await upgrades.deployProxy(MyTokenStakingFac, 
-                                                    [
-                                                      "0x877467717a775C9504eCa8FBb99aD5cf88a82e3A"
-                                                    ]);
+  const myTokenStaking = await upgrades.deployProxy(MyTokenStakingFac, ["0x877467717a775C9504eCa8FBb99aD5cf88a82e3A"]);
   
   await myTokenStaking.deployed();
   console.log("Address My Token Staking", myTokenStaking.address);
@@ -44,9 +41,9 @@ async function main() {
   [deployer] = await ethers.getSigners();
 
   // await deployContractYBNFT();
-  // await deployContractSadNFT();
+  await deployContractSadNFT();
   // await deployContractMyNft();
-  await deployContractStakingToken();
+  // await deployContractStakingToken();
 }
 
 main().catch((error) => {
