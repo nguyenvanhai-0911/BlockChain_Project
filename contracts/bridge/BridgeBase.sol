@@ -26,7 +26,7 @@ contract BridgeBase {
   }
 
   function burn(address to, uint amount, uint nonce, bytes calldata signature) external {
-    require(processedNonces[msg.sender][nonce] == false, 'transfer already processed');
+    require(processedNonces[msg.sender][nonce] == false, 'Transfer already processed');
     processedNonces[msg.sender][nonce] = true;
     token.burn(msg.sender, amount);
     emit Transfer(
@@ -53,8 +53,8 @@ contract BridgeBase {
       amount,
       nonce
     )));
-    require(recoverSigner(message, signature) == from , 'wrong signature');
-    require(processedNonces[from][nonce] == false, 'transfer already processed');
+    require(recoverSigner(message, signature) == from , 'Wrong signature');
+    require(processedNonces[from][nonce] == false, 'Transfer already processed');
     processedNonces[from][nonce] = true;
     token.mint(to, amount);
     emit Transfer(
