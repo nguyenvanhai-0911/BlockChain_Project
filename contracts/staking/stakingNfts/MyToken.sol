@@ -15,7 +15,7 @@ contract MyToken is ERC20Upgradeable, ERC721HolderUpgradeable, OwnableUpgradeabl
     uint256 public EMISSION_RATE; 
 
     function initialize(address _nft) public initializer {
-        __ERC20_init("MyToken", "HaiToken");
+        __ERC20_init("MyToken", "YBToken");
         nft = IERC721Upgradeable(_nft);
         EMISSION_RATE = (100 * 10**decimals()) / 1 days;
     }
