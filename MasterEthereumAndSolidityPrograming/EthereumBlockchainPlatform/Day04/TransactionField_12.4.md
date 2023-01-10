@@ -1,7 +1,6 @@
 ###     *** Transaction Fileds ***
 
 * Example :
-
 from: "0x9300d2bB77C695FE8708692Cc56A3a4dDF14A1D5" to: "0x22331B228721e09E6916CB7d17C8Db20bbAF5C22" value: "10000000000"
 gasLimit: "21000"
 gasPrice: "120"

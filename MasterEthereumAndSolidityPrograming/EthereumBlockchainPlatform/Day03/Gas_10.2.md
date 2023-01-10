@@ -15,11 +15,8 @@
 - The higher the gasPrice, the faster the transaction will be mined;
 
 - Example:
-
     + Multiplication operation (MUL): 5 gas
-
     + Addition operation (ADD): 3 gas
-
     + Equality comparison (EQ): 3 gas
 
     => Total gas: 11 gasLimit = 21,000 gasPrice is 50Gwei (50,000,000,000 wei) 
