@@ -10,5 +10,4 @@
         * transfer(): should be used in most cases as it's the safest way to send ether
         * send(): is like a low-level transfer(). If execution fails the contract will not stop and send() returns false;
     + call(), delegatecall(), staticcall()
-    
 Example: 0xf8e81D47203A594245E36C48e151709F0C19fBe8

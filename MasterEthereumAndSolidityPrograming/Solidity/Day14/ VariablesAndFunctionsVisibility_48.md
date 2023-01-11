@@ -21,10 +21,7 @@ There are four visibility specifiers for functions and state variables:
 ###     *** Variables & Functions Visibility (cont) ***
 
     - Everything that is inside a contract is visible to all external observers. Making something private only prevents other contracts from accessing and modifying the information, but it will still be visible to the whole world outside of the blockchain;
-
     - Information is not encrypted by default on the Ethereum Blockchain;
-    
     - The visibility specifier is given after the type for state variables and between parameter list and return parameter list for functions;
-    
     - External functions are more efficient than public functions in terms of gas consumption;
    
